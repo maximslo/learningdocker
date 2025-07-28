@@ -1,0 +1,31 @@
+services:
+
+  # flask service
+  flaskapp:
+    container_name: flaskapp
+    image: flaskapp:1.0.0
+    build:
+      context: ./backend
+      dockerfile: flask.dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      - FLASK_APP=app.py
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+    depends_on:
+      - db
+
+  db:
+    container_name: db            # Names the container "db"
+    image: postgres:13            # Uses the official Postgres 13 image
+    environment:                  # Sets up credentials & default DB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432                 # Exposes port 5432 for connections
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # Mounts persistent volume
+
+volumes:
+  pgdata: {}                      # Declares a named volume for data persistence
