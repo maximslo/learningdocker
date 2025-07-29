@@ -26,7 +26,7 @@ with app.app_context():
 def test():
     return jsonify({'message': 'The server is running'})
 
-# create a user
+# create a user (POST)
 @app.route('/api/flask/users', methods=['POST'])
 def create_user():
     try:
@@ -44,7 +44,7 @@ def create_user():
     except Exception as e:
         return make_response(jsonify({'message': 'Error creating user', 'error': str(e)}), 500)
 
-# get all users
+# get all users (GET)
 @app.route('/api/flask/users', methods=['GET'])
 def get_users():
     try:
@@ -66,7 +66,7 @@ def get_user(id):
     except Exception as e:
         return make_response(jsonify({'message': 'Error getting user', 'error': str(e)}), 500)
  
-# update a user by id
+# update a user by id (PUT/UPDATE)
 @app.route('/api/flask/users/<id>', methods=['PUT'])
 def update_user(id):
     try:
@@ -81,6 +81,7 @@ def update_user(id):
     except Exception as e:
         return make_response(jsonify({'message': 'Error getting user', 'error': str(e)}), 500)
 
+# delete user (DELETE)
 @app.route('/api/flask/users/<id>', methods=['DELETE'])
 def delete_user(id):
     try:
