@@ -13,8 +13,10 @@ interface User {
     email: string;
   }
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+
+
 export default function UserInterface({ backendName }: UserInterfaceProps) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://localhost:4000'
     const [users, setUsers] = useState<User[]>([])
     const [newUser, setNewUser] = useState({ name: '', email: '' })
     const [updateUser, setUpdateUser] = useState({ id: '', name: '', email: '' })
@@ -35,6 +37,11 @@ export default function UserInterface({ backendName }: UserInterfaceProps) {
 
     return <div>
         <h1>{backendName}</h1>
-        <CardComponent card={{ id: 1, name: "John Doe", email: "email" }} />
+        <div>
+            {users.map((user) => (
+                <CardComponent card={user}/>
+            ))}
+        </div>
+        {/* <CardComponent card={{ id: 1, name: "John Doe", email: "email" }} /> */}
     </div>
 }
