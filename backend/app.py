@@ -3,6 +3,11 @@ from flask_sqlalchemy import SQLAlchemy # ORM to create schema
 from flask_cors import CORS
 from os import environ
 
+# docker compose up -d flaskapp (start services)
+# docker exec -it db psql -U postgres
+# \dt
+# select * from users;
+
 app = Flask(__name__)
 CORS(app) # enables CORS for all routes
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DATABASE_URL')

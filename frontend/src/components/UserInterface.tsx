@@ -40,7 +40,7 @@ export default function UserInterface({ backendName }: UserInterfaceProps) {
     e.preventDefault();
     try {
         const response = await axios.post(`${apiUrl}/api/${backendName}/users`, newUser);
-        setUsers([response.data, ...users])
+        setUsers([response.data, ...users]) // prepends new user to exisiting list
         setNewUser({name: '', email: ''})
     } catch (error) {
         console.error('Error creating user:', error)
